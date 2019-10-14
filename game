@@ -1,0 +1,70 @@
+package Game;
+import java.io.*;
+
+public class Game2 {
+
+	public static void main(String[] args) {
+		int numofuser=0;
+		RunGame dot=new RunGame();
+		UserInput helper=new UserInput();
+		int num=(int)(Math.random()*5);
+		int[] nums= {num,num+1,num+2};
+		dot.setgame(nums);
+		boolean isalive = true;
+		while(isalive==true) {
+			numofuser++;
+			String guess=helper.userinput("请输入一个数：");
+			String result=dot.check(guess);
+			if(result.equals("kill")) {
+				isalive=false;
+				System.out.println("你一共猜了"+numofuser+"次");
+				
+			}
+		}
+
+	}
+
+}
+
+class RunGame{
+	int[] gamecells;
+	int numofhit=0;
+	void setgame(int[] gamenum) {
+		 gamecells = gamenum;
+	}
+	String check(String strguess) {
+		String hit="miss";
+		int guess=Integer.parseInt(strguess);
+		for(int cell:gamecells) {
+			if(cell==guess) {
+				hit="hit";
+				numofhit++;
+				if(numofhit==3) {
+					hit="kill";
+				}
+				break;
+			}
+		}
+		System.out.println(hit);
+		return hit;
+	}
+	
+	
+}
+class UserInput{
+	String userinput(String prompt) {
+		String input=null;
+		System.out.print(prompt+" ");
+		try {
+			BufferedReader is = new BufferedReader(new InputStreamReader(System.in));
+			input=is.readLine();
+			if(input.length()==0) {
+				return null;
+			}
+		}catch (IOException e) {
+			System.out.println("IOException"+e);
+		}
+		return input;		
+	}
+	
+}
