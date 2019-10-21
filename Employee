@@ -1,0 +1,47 @@
+import java.time.*;
+/**
+*先输入员工数据：姓名，薪资，入职时间
+*获取信息
+*/
+public class Employee {
+
+	public static void main(String[] args) {
+		Data[] staff=new Data[3];
+		staff[0]=new Data("郑**",12000,2019,10,21);
+		staff[1]=new Data("李**",11001,2019,8,20);
+		staff[2]=new Data("小土豆块",20000,2019,9,30);
+		//全部加薪10%
+		for(Data e:staff)
+			e.raise(10);
+		//获得最新资料
+		for(Data e:staff)
+			System.out.println("名字："+e.getname()+" 薪资："+e.getsalary()+" 入职时间："+e.gethireday());
+	
+	}
+
+}
+class Data{
+	private String name;
+	private double salary;
+	private LocalDate hireday;
+	public Data(String n,double s,int year,int month,int day){
+		name=n;
+		salary=s;
+		hireday=LocalDate.of(year,month,day);		
+	}
+	public String getname(){
+		return name;
+	}
+	public double getsalary(){
+		return salary;
+	}
+	public LocalDate gethireday(){
+		return hireday;
+	}
+	public void raise(double r){
+		double raise=salary*r/100;
+		salary=salary+raise;
+	}
+}
+
+
