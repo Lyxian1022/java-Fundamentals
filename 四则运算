@@ -1,0 +1,75 @@
+/**
+ * 随机出现20以内的加减乘除，用户输入结果，计算机核验
+ * 结果正确：YES
+ * 结果错误：NO
+ */
+import java.util.Scanner;
+public class jisuan {
+
+	public static void main(String[] args) {	
+		
+		Proce p=new Proce();
+		Scanner input=new Scanner(System.in);
+		int i=4;
+		while(i>0){
+			i--;
+			int num1 =(int)(Math.random()*20);
+			int num2 =(int)(Math.random()*20);
+			int ran =(int)(Math.random()*4);//0加，1减，2乘，3除
+			if(ran==0){
+				System.out.print(num1+"+"+num2+"=");
+				int uinput=input.nextInt();
+				int ans=p.add(num1,num2);
+				if(ans==uinput){
+					System.out.println("YES!");
+				}else{
+					System.out.println("NO!");
+				}
+			}else if(ran==1){
+				System.out.print(num1+"-"+num2+"=");
+				int uinput=input.nextInt();
+				int ans=p.sub(num1,num2);
+				if(ans==uinput){
+					System.out.println("YES!");
+				}else{
+					System.out.println("NO!");
+				}
+			}else if(ran==2){
+				System.out.print(num1+"*"+num2+"=");
+				int uinput=input.nextInt();
+				int ans=p.mul(num1,num2);
+				if(ans==uinput){
+					System.out.println("YES!");
+				}else{
+					System.out.println("NO!");
+				}
+			}else{
+				System.out.print(num1+"/"+num2+"=");
+				double uinput=input.nextDouble();
+				double ans=p.div(num1,num2);
+				if(ans==uinput){
+					System.out.println("YES!");
+				}else{
+					System.out.println("NO!");
+				}
+			}
+
+	}
+
+}
+}
+class Proce{
+	public int add(int x,int y){
+		int sum=x+y;
+		return sum;
+	}
+	public int sub(int x,int y){
+		return x-y;
+	}
+	public int mul(int x,int y){
+		return x*y;
+	}
+	public double div(int x,int y){
+		return x*1.0/y;
+	}
+}
