@@ -1,0 +1,61 @@
+import java.time.*;
+/*
+继承类的演示
+*/
+
+public class hireclass {
+	public static void main(String[] args) {
+		Manger boss=new Manger("qing",8000,2019,10,22);
+		boss.setbonus(500);
+		Employee[] staff=new Employee[3];
+		staff[0]=boss;
+		staff[1]=new Employee("xian",5000,2019,2,4);
+		staff[2]=new Employee("mao",4000,2018,6,5);
+		
+		for(Employee e:staff){
+			System.out.println("name:"+e.getname()+",salary:"+e.getsalary()+",hireday:"+e.gethireday());
+		}
+
+	}
+
+}
+class Employee{
+	private String name;
+	private double salary;
+	private LocalDate hireday;
+	
+	public Employee(String name,double salary,int year,int month,int day){
+		this.name=name;
+		this.salary=salary;
+		this.hireday=LocalDate.of(year, month, day);
+		
+	}
+	public String getname(){
+		return name;
+	}
+	public double getsalary(){
+		return salary;
+	}
+	public LocalDate gethireday(){
+		return hireday;
+	}
+	public void raisesalary(double s){
+		double per=salary*s/100;
+		salary +=per;
+	}
+}
+//继承用extends关键字
+class Manger extends Employee{
+	private double bonus;
+	public Manger(String name,double salary,int year,int month,int day){	
+	super(name,salary,year,month,day);//继承超类的变量
+	bonus=0;
+	}
+	public double getsalary(){
+		double base=super.getsalary();
+		return base+bonus;
+	}
+	public void setbonus(double b){
+		bonus=b;
+	}
+}
