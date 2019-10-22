@@ -1,0 +1,27 @@
+import java.util.*;
+/*
+ * 输入2名同学，每名同学都有2门成绩
+ * 输出每个同学的总成绩
+ * */
+public class test {
+	public static void main(String[] args){
+		Scanner cj=new Scanner(System.in);
+		int[][] stu=new int [2][2];
+		for(int i=0;i<stu.length;i++){
+			for(int j=0;j<stu[i].length;j++){
+				stu[i][j]=cj.nextInt();
+			}
+		}
+		int[] sum=new int[2];
+		int temp=0;
+		for(int u=0;u<stu.length;u++){
+			for(int v=0;v<stu[u].length;v++){
+				temp += stu[u][v];
+			}
+			sum[u]=temp;
+			temp=0;
+		}
+		for(int e:sum)
+			System.out.println(e);
+	}
+}
