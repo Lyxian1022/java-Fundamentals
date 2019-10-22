@@ -3,7 +3,7 @@ import java.time.*;
 继承类的演示
 */
 
-public class hireclass {
+public class inheritclass {
 	public static void main(String[] args) {
 		Manger boss=new Manger("qing",8000,2019,10,22);
 		boss.setbonus(500);
