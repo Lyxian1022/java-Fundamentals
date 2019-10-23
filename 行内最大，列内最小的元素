@@ -1,0 +1,30 @@
+/**
+ *求满足在行内最大，列内最小的元素
+ * */
+public class test {
+	public static void main(String[] args){
+			int [][] a={{1,2,3,4},{5,6,7,10},{9,10,11,12},{1,1,1,2}};
+			int max=0;
+			int t=0;
+			int flag=0;
+			for(int i=0;i<a.length;i++){
+				t=a[i][0];
+				for(int j=0;j<a.length;j++){
+					if(a[i][j]>t){
+						t=a[i][j];
+						max=j;
+					}
+					t=a[i][max];	
+				    }
+				flag=1;
+				for(int j=0;j<a.length;j++){
+					if(a[j][max]<t){
+						flag=0;
+						break;
+					}
+				}
+				if(flag==1)
+					System.out.println("鞍点是："+a[i][max]);
+			}	
+  }
+}
