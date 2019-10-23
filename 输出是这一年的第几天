@@ -1,0 +1,27 @@
+import java.util.Scanner;
+
+/**
+ * 输入日期 
+ * 输出是这一年的第几天
+ * 输入格式：年 月 日
+ * */
+public class test {
+	public static void main(String[] args){
+		Scanner kb=new Scanner(System.in);
+		int[][] d={{0,31,28,31,30,31,30,31,31,30,31,30,31},
+				{0,31,29,31,30,31,30,31,31,30,31,30,31}};
+		int run=0;//0为非闰年，1为闰年
+		int sum=0;
+		int year=kb.nextInt();
+		int month=kb.nextInt();
+		int day=kb.nextInt();
+		if(year%4==0&&year%100!=0||year%400==0)
+			run=1;
+		else 
+			run=0;
+		for(int i=1;i<month;i++)
+			sum +=d[run][i];
+		sum +=day;
+		System.out.println(year+"-"+month+"-"+day+"是今年的第"+sum+"天");
+  }
+}
