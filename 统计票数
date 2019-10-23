@@ -1,0 +1,28 @@
+import java.util.Scanner;
+
+/**
+ * 十位候选人，统计输入的票数
+ *输出最高票数者
+ * */
+public class test {
+	public static void main(String[] args){
+		Scanner in=new Scanner(System.in);
+		int[] count=new int[11];
+		int vote;
+		int index=1;
+		vote=in.nextInt();
+		while(vote!=-1){
+			vote=in.nextInt();
+			if(vote>=1&&vote<=10)
+				count[vote]++;
+		}
+		for(int i=1;i<count.length;i++){
+			if(count[i]>count[index])
+				index=i;
+		}
+		System.out.println("十位候选人获得的票数如下：");
+		for(int i=1;i<count.length;i++)
+			System.out.print(count[i]+"  ");
+		System.out.println("\n获胜者是："+index+"号候选人！");
+  }
+}
