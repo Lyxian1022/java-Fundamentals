@@ -1,0 +1,33 @@
+import java.util.Scanner;
+
+/**
+ * 打印小于n的所有质数
+ * */
+public class test {
+	public static void main(String[] args){
+		Scanner in=new Scanner(System.in);
+		int count=0;
+		int n=in.nextInt();
+		boolean[] b=new boolean[n];
+		b[2]=true;
+		for(int i=3;i<b.length;i++)
+		{
+			if(i%2==0)
+				b[i]=false;
+			else
+				b[i]=true;
+		}
+		for(int i=3;i<b.length/2;i++){
+			for(int j=i;j<b.length;j+=2){
+				if(j%i==0 &&j!=i)
+					b[j]=false;
+			}
+				
+		}
+		for(boolean e:b){
+			if(e)				
+				System.out.print(count+"  ");			
+			count++;
+		}
+}
+}
