@@ -1,0 +1,41 @@
+/*
+ * 类继承
+ * 方法覆盖
+ * 方法重载
+ * */
+
+public class test {
+	public static void main(String[] args){
+		Cat c=new Cat();
+		c.work();
+		Cat d=new Cat("汤姆","抓老鼠");
+		d.work();
+ }
+}
+class Animal{
+	private String name;
+	public Animal(){
+		name="无名氏";
+	}
+	public Animal(String name){
+		this.name=name;
+	}
+	public void work(){
+		System.out.print(name+"忙于");
+	}
+	
+}
+class Cat extends Animal{
+	private String skill;
+	public Cat(){
+		skill="学本领";
+	}
+	public Cat(String name,String skill){
+		super(name);
+		this.skill=skill;
+	}
+	public void work(){
+		super.work();
+		System.out.println(skill);
+	}
+}
