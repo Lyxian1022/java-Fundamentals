@@ -1,0 +1,25 @@
+import java.io.*;
+/*
+ * 统计输入的数字个数
+ * */
+public class exception {
+	public static void main(String[] args) {
+		char ch='0';
+		int count=0;
+		while(ch!='#') {
+		try {
+			ch=(char)System.in.read();
+			
+			if(ch>='0'&&ch<='9') {
+				count++;
+			}
+			}catch(IOException e) {
+				System.out.println("老弟，你输入错了！");
+			
+			}
+	}
+		System.out.println(ch);
+		System.out.println("你一共输入了"+count+"个数字。");
+	
+}
+}
