@@ -1,0 +1,23 @@
+import java.util.*;
+/*
+多个异常的情况
+*/
+public class exception {
+
+	public static void main(String[] args) {
+		Scanner i=new Scanner(System.in);
+		int a=9;
+		try {
+			int b=i.nextInt();
+			System.out.println(a/b);
+		}catch(InputMismatchException e1) {
+			System.out.println("大兄弟你输入的不是整数呀！");
+		}catch(ArithmeticException e2) {
+			System.out.println("说实话你是不是输入0了？");
+		}finally {
+			System.out.println("byebye~~");
+		}
+		
+	}
+
+}
