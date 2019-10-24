@@ -1,0 +1,40 @@
+import java.io.*;
+/*
+ * 以字节流的方式读文件
+ * 以字节流的方式写文件
+ * 以上两步实现文件的copy
+ * 删除原有文件
+ * */
+public class exception {
+	static void filecopy(File a,File b) {
+		try {
+			FileInputStream fr=new FileInputStream(a);
+			FileOutputStream fw=new FileOutputStream(b);
+			int ch=0;
+			while(ch!=-1)
+			{
+				ch=fr.read();
+				fw.write(ch);
+			}
+			fr.close();
+			fw.close();		
+		}catch(IOException e) {
+			System.out.println("文件访问失败咯~");
+		}
+	}
+	public static void main(String[] args)  throws IOException{
+		File f1=new File("/Users/liyaxian/Desktop/ex2.doc");
+		File f2=new File("/Users/liyaxian/Desktop/ex1.doc");
+		if(f1.exists()) {
+			System.out.println("文件的大小为："+f1.length()+"Bytes");
+			filecopy(f1,f2);
+			boolean deleted=f1.delete();
+			if(deleted) {
+				System.out.println("文件删除成功！bingo~~");
+			}
+		}else {
+			System.out.println("你这个文件不存在呀，臣妾做不到呀~~");
+		}
+
+}
+}
