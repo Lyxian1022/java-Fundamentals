@@ -1,0 +1,23 @@
+/*
+ * 内部类
+ * */
+public class Outer {
+
+	public static void main(String[] args) {
+		Outer out=new Outer();
+		Outer.Inner in=out.new Inner();
+		in.pr("1");
+		Outer.Inner inn;
+		inn=out.getinner();
+		inn.pr("2");
+		
+	}	
+	public Inner getinner() {
+		return new Inner();
+	}
+	public class Inner{
+		public void pr(String str) {
+			System.out.println(str);
+		}
+	}
+}
