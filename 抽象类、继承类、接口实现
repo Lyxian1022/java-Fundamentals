@@ -1,0 +1,58 @@
+/*
+ * 抽象类
+ * 继承类
+ * 应用接口
+ * */
+public class AI {
+
+	public static void main(String[] args) {
+		Eagle e=new Eagle("小鹰");
+	
+		e.fly();
+		
+		e.speak();
+		Cat c=new Cat("小猫猫");
+		
+		c.speak();
+		Airp a=new Airp();
+		a.fly();
+	}
+
+}
+abstract class Animal{
+	private String name;
+	public Animal(String name) {
+		this.name=name;
+	}
+	public String getname() {
+		return name;
+	}
+	public abstract void speak();
+}
+interface Flying{
+	public void fly(); //接口内的抽象方法不用abstract关键字
+}
+class Cat extends Animal {	
+	public Cat(String name) {
+		super(name);
+	}
+	public void speak() {
+		System.out.println(getname()+"喵~~~");
+	}
+}
+class Eagle extends Animal implements Flying{
+	public Eagle(String name) {
+		super(name);
+	}
+	public void speak() {
+		System.out.println(getname()+"哇~~~");
+	}
+	public void fly() {
+		System.out.println(getname()+"展翅飞翔~~~");
+	}
+}
+class Airp implements Flying{
+	public void fly() {
+		System.out.println("飞机动力强劲飞飞飞~~~");
+	}
+}
