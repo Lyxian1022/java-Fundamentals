@@ -1,0 +1,19 @@
+/*
+ * 文件读
+ * 文件写
+ * */
+public class exception {
+	public static void main(String[] args)  throws IOException{
+	FileReader f=new FileReader("ex1data1.txt");
+	FileWriter fw=new FileWriter("ex1data1.txt",true);
+	int ch=0;
+	while(ch!=-1) {
+		ch=f.read();
+		System.out.print((char)ch);
+	}
+	fw.write("\n是大好人，嘿嘿~");
+	f.close();
+	fw.close();
+	
+}
+}
