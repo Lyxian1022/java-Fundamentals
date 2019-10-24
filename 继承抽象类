@@ -1,0 +1,46 @@
+/*
+ * 父类是抽象类
+ * 继承类
+ * */
+public class OutIn {
+
+	public static void main(String[] args) {
+	Shape[] s=new Shape[3];
+	s[0]=new Cir(1);
+	s[1]=new rec(2,3);
+	s[2]=new rec(4,6);
+	for(int i=0;i<s.length;i++)
+		System.out.println("面积是："+s[i].area()+"，周长是："+s[i].zhou());
+	}
+
+}
+abstract class Shape{
+	public abstract double area();
+	public abstract double zhou();
+}
+class Cir extends Shape{
+	private double r;
+	public  Cir(double r) {
+		this.r=r;
+	}
+	public double area() {
+		return Math.PI*r*r;
+	}
+	public double zhou() {
+		return Math.PI*2*r;
+		
+	}
+}
+class rec extends Shape{
+	private double w,h;
+	public rec(double w,double h) {
+		this.w=w;
+		this.h=h;
+	}
+	public double area() {
+		return w*h;
+	}
+	public double zhou() {
+		return 2*w+2*h;
+	}
+}
