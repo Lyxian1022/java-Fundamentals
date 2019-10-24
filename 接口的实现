@@ -1,0 +1,26 @@
+/*
+ * 接口的实现
+ * 接口中只有常量和抽象方法
+ * */
+public class interfac {
+
+	public static void main(String[] args) {
+		Apear ap=new Apear();
+		ap.growapple();
+		ap.growpear();
+	}
+}
+interface Apple{
+	public void growapple();
+}
+interface Pear{
+	public void growpear();
+}
+class Apear implements Apple,Pear{
+	public void growapple() {
+		System.out.println("农夫果园苹果1号");
+	}
+	public void growpear() {
+		System.out.println("农夫果园🍐1号");
+	}
+}
