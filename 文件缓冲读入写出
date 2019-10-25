@@ -1,0 +1,23 @@
+import java.io.*;
+/*
+ * 文件按行输入，每读一行顺序添加行号
+ * 并写入另一个文件中
+ * */
+public class Copy {
+
+	public static void main(String[] args) throws IOException {
+		FileReader fr=new FileReader("/Users/liyaxian/Desktop/1.txt");
+		FileWriter fw=new FileWriter("/Users/liyaxian/Desktop/2.txt");
+		BufferedReader br=new BufferedReader(fr);//缓冲方式的文本读取
+		PrintWriter pw=new PrintWriter(fw);//缓冲方式的文本输出
+		String temp;
+		int i=1;
+		while((temp=br.readLine())!=null) {
+			pw.printf("%d  %s", i++,temp);//往新文件里写，不是往屏幕上输出
+			pw.println();
+		}
+		br.close();
+		pw.close();
+	}
+
+	}
