@@ -1,0 +1,25 @@
+import java.io.*;
+/*
+ * 凯撒加密字符，每个字母后移key位
+ * */
+public class Addsecret {
+
+	public static void main(String[] args) throws IOException{
+		FileReader fr=new FileReader("/Users/liyaxian/Desktop/love.txt");
+		FileWriter fw=new FileWriter("/Users/liyaxian/Desktop/alove.txt");
+		int key=7;
+		int ch;
+		while(-1!=(ch=fr.read())) {
+			if(ch>='a'&&ch<='z') {
+				ch='a'+(ch-'a'+key)%26;
+			}else if(ch>='A'&&ch<='Z') {
+				ch='A'+(ch-'A'+key)%26;
+			}
+			fw.write((char)ch);
+		}
+		fr.close();
+		fw.close();
+
+	}
+
+}
