@@ -1,0 +1,41 @@
+import java.io.*;
+/*
+ * 两种方法复制文件
+ * 1.字节流复制（慢，5.6Mpdf需要63ms）
+ * 2.缓冲字节流复制（快，5.6Mpdf需要26-18ms）
+ * */
+public class Copy {
+
+	public static void main(String[] args) throws IOException {
+		long start=System.currentTimeMillis();
+		CopyB("/Users/liyaxian/Desktop/Python编程：从入门到实践.pdf","/Users/liyaxian/Desktop/Py.pdf");
+		long end=System.currentTimeMillis();
+		System.out.println("一共耗时："+(end-start)+"毫秒");
+	}
+	//此方法5.6M的pdf复制，需要63毫秒
+	public static void CopyA(String src,String des) throws IOException{
+		FileInputStream fis=new FileInputStream(src);
+		FileOutputStream fos=new FileOutputStream(des);
+		byte[] bys=new byte[1024];
+		int len;
+		while((len=fis.read(bys))!=-1) {
+			fos.write(bys,0,len);
+		}
+		fos.close();
+		fis.close();
+		
+	}
+	//此方法26-18毫秒
+	public static void CopyB(String src,String des)throws IOException{
+		BufferedInputStream bis=new BufferedInputStream(new FileInputStream(src));
+		BufferedOutputStream bos=new BufferedOutputStream(new FileOutputStream(des));
+		byte[] bys=new byte[1024];
+		int len=0;
+		while((len=bis.read(bys))!=-1) {
+			bos.write(bys, 0, len);
+		}
+		bis.close();
+		bos.close();
+	}
+
+	}
