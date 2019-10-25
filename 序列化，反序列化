@@ -1,0 +1,44 @@
+import java.io.*;
+/*
+ *序列化对象
+ *反序列化对象
+ * */
+public class exception {
+	
+	public static void main(String[] args)  throws IOException,ClassNotFoundException{
+		try{FileOutputStream fo=new FileOutputStream("/Users/liyaxian/Desktop/ex0.txt");
+			ObjectOutputStream out=new ObjectOutputStream(fo);
+			out.writeObject(new Student("张无忌",116,"重点班"));
+			out.writeObject(new Student("张三丰",118,"一班"));
+			out.writeObject(new Student("灭绝师太",116,"二班"));
+			
+			out.close();
+			//开始反序列化
+			FileInputStream fr=new FileInputStream("/Users/liyaxian/Desktop/ex0.txt");
+			ObjectInputStream ois=new ObjectInputStream(fr);
+			Student e1=(Student)ois.readObject();//可以自动读取下一个对象
+			Student e2=(Student)ois.readObject();
+			Student e3=(Student)ois.readObject();
+			e1.show();
+			e2.show();
+			e3.show();
+			ois.close();
+		}catch(IOException e) {
+			e.printStackTrace();
+		}
+}
+}
+class Student implements Serializable{
+	private static final long serialVersionUID=1;
+	private String name;
+	private int age;
+	private String nianji;
+	public Student(String name,int age,String nianji) {
+		this.name=name;
+		this.age=age;
+		this.nianji=nianji;
+	}
+	public void show() {
+		System.out.println("姓名："+name+"\t年龄："+age+" \t班级："+nianji);
+	}
+}
