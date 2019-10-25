@@ -1,0 +1,27 @@
+import java.io.*;
+/*
+ * 列出指定文件夹中的文件及文件夹
+ *递归方法
+ * */
+public class Copy {
+
+	public static void main(String[] args) throws IOException {
+		File my=new File("/Users/liyaxian/Desktop/2019数模赛题");
+		printfiles(my);
+		
+	}
+	public static void printfiles(File file) {
+		if(file != null) {
+			if(file.isDirectory()) {
+				File f[]=file.listFiles();
+				if(f!=null) {
+					for(int i=0;i<f.length;i++) {
+						printfiles(f[i]);
+					}
+				}
+			}else {
+				System.out.println(file);
+			}
+		}
+	}
+}
