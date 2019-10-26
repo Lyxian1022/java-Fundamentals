@@ -1,0 +1,28 @@
+import javax.swing.*;
+/*
+ * GUI初识
+ * 面板作为容器是看不见的
+ * */
+public class Gui {
+
+	public static void main(String[] args) {
+		Firstframe frm=new Firstframe();
+		frm.setVisible(true);
+	}
+
+}
+class Firstframe extends JFrame{
+	public Firstframe() {
+		setTitle("晴晴是美女");
+		setLocation(500,600);
+		setSize(400,300);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		JLabel label=new JLabel("晴晴是一个大美妞");
+		JButton btn=new JButton("说得对");
+		JPanel p=new JPanel();
+		p.add(label);
+		p.add(btn);
+		//设置窗体的内容窗格，相当于初始化
+		setContentPane(p);
+	}
+}
