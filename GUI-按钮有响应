@@ -1,0 +1,38 @@
+package Game;
+import java.awt.event.*;
+import javax.swing.*;
+/*
+ * 点击按钮，有响应
+ * 监听器
+ * */
+public class Gui {
+
+	public static void main(String[] args) {
+		Changet frm=new Changet();
+		frm.setVisible(true);
+	}
+
+}
+class Changet extends JFrame implements ActionListener{
+	Changet() {
+		setLocation(500,600);
+		//setSize(600,500);//宽，高
+		setTitle("我是小晴晴");
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		JButton btn1=new JButton("大晴晴");
+		JButton btn2=new JButton("小晴晴");
+		
+		btn1.addActionListener(this); //注册消息源btn
+		btn2.addActionListener(this);//this代表监听器对象
+		JPanel panel=new JPanel();
+		panel.add(btn1);
+		panel.add(btn2);
+		setContentPane(panel);
+		pack();//窗口被设置为最佳大小
+	}
+	public void actionPerformed(ActionEvent event) {
+		String title=((JButton)event.getSource()).getText()+"被宠爱了";
+		setTitle(title);
+	}
+	
+}
