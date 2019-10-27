@@ -1,0 +1,41 @@
+package Game;
+import javax.swing.*;
+import java.awt.*;
+/*
+ * 网格布局
+ * GridLayout
+ * */
+public class GUIGrid {
+
+	public static void main(String[] args) {
+		Gridlayout frm=new Gridlayout();
+		frm.setVisible(true);
+
+	}
+
+}
+class Gridlayout extends JFrame{
+	String strArr[]= {"按钮1","按钮2","按钮3","按钮4","按钮5","按钮6",
+			"按钮7","按钮8","按钮9"
+	};
+	Gridlayout(){
+		setTitle("这就是网格布局");
+		setSize(300,200);
+		setLocation(300,200);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		JPanel p=new JPanel();
+		p.setLayout(new GridLayout(3,3,10,10));
+		JButton[] btnArr=new JButton[9];
+		for(int i=0;i<strArr.length;i++) {
+			btnArr[i]=new JButton(strArr[i]);
+			p.add(btnArr[i]);
+		}
+		setContentPane(p);
+		
+	}
+	
+}
+
+
+
+
