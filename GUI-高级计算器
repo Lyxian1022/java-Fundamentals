@@ -1,0 +1,93 @@
+import java.awt.*;
+import java.awt.event.*;
+import javax.swing.*;
+/*
+ * 高级计算器
+ * */
+public class GUICal {
+
+	public static void main(String[] args) {
+		Cal c=new Cal();
+		c.setVisible(true);
+
+	}
+
+}
+class Cal extends JFrame implements ActionListener{
+	private JTextField tf;
+	private JPanel p;
+	private JButton b[];
+	private boolean start;
+	private double result;
+	private String lastcommand;
+	public Cal(){
+		setTitle("高级计算器");
+		setSize(300,200);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		p=new JPanel();
+		b=new JButton[16];
+		tf=new JTextField(20);
+		tf.setHorizontalAlignment(JTextField.RIGHT);
+		add(tf,BorderLayout.NORTH);
+		String name[]= {
+				"1","2","3","+",
+				"4","5","6","-",
+				"7","8","9","*",
+				"0",".","=","/",
+		};
+		p.setLayout(new GridLayout(4,4));
+		for(int i=0;i<name.length;i++) {
+			b[i]=new JButton(name[i]);
+			b[i].addActionListener(this);
+			p.add(b[i]);
+		}
+		add(p,BorderLayout.CENTER);
+		result=0;
+		lastcommand="=";
+		start=true;
+	}
+	public void actionPerformed(ActionEvent e) {
+		String btnText=e.getActionCommand();
+		String insert="1234567890.";
+		if(insert.indexOf(btnText)==-1)
+			commandAction(btnText);
+		else
+			insertAction(btnText);
+	}
+	private void insertAction(String input) {
+		if(start) {
+			tf.setText("");
+			start=false;
+		}
+		tf.setText(tf.getText()+input);
+	}
+	private void commandAction(String command) {
+		if(start) {
+			if(command.equals("-")) {
+				tf.setText(command);
+				start=false;
+			}
+			else 
+				lastcommand=command;
+		}
+		else {
+			calculate(Double.parseDouble(tf.getText()));
+			lastcommand=command;
+			start=true;
+		}
+	}
+
+		private void calculate(double x) {
+			if(lastcommand.equals("+"))
+				result +=x;
+			else if(lastcommand.equals("-"))
+				result -=x;
+			else if(lastcommand.equals("*"))
+				result *=x;
+			else if(lastcommand.equals("/"))
+				result /=x;
+			else if(lastcommand.equals("="))
+				result =x;
+			tf.setText(result+"");
+		}
+}
