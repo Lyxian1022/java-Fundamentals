@@ -1,0 +1,57 @@
+package Game;
+
+import java.awt.event.*;
+
+import javax.swing.*;
+
+/*
+ * 通过JTextField 文本框
+ * 实现加法器
+ * */
+public class GUItext {
+
+	public static void main(String[] args) {
+		AddFrame f=new AddFrame();
+		f.setVisible(true);
+
+	}
+
+}
+class AddFrame extends JFrame implements ActionListener{
+	private JTextField tfop1;
+	private JTextField tfop2;
+	private JTextField tfsum;
+	private JButton btnque;
+	public AddFrame() {
+		JLabel ladd=new JLabel("+");
+		btnque=new JButton("=");
+		tfop1=new JTextField(10);
+		tfop2=new JTextField(10);
+		tfsum=new JTextField(10);
+		setTitle("加法器");
+		setBounds(200,300,500,80);
+		//pack();
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		tfop1.setHorizontalAlignment(JTextField.RIGHT);
+		tfop2.setHorizontalAlignment(JTextField.RIGHT);
+		tfsum.setHorizontalAlignment(JTextField.RIGHT);
+		btnque.addActionListener(this);
+		JPanel p=new JPanel();
+		p.add(tfop1);
+		p.add(ladd);
+		p.add(tfop2);
+		p.add(btnque);
+		p.add(tfsum);
+		setContentPane(p);
+	}
+	public void actionPerformed(ActionEvent event) {
+		try {
+			int sum;
+			sum=Integer.parseInt(tfop1.getText())+Integer.parseInt(tfop2.getText());
+			tfsum.setText(sum+"");
+		}catch(Exception e) {
+			JOptionPane.showMessageDialog(null, e.toString());
+		}
+	}
+	
+}
