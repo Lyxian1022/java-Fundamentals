@@ -1,0 +1,127 @@
+import java.awt.GridLayout;
+import java.awt.event.*;
+
+import javax.swing.*;
+
+/*
+ * 通过JTextField 文本框
+ * GridLayout网格布局
+ * 实现计算器+，-，*，÷
+ * */
+public class GUItext {
+	public static void main(String[] args) {
+		AddFrame f=new AddFrame();
+		f.setVisible(true);
+	}
+}
+class AddFrame extends JFrame implements ActionListener{
+	private JTextField tfop1;
+	private JTextField tfop2;
+	private JTextField tfop3;
+	private JTextField tfop4;
+	private JTextField tfop5;
+	private JTextField tfop6;
+	private JTextField tfop7;
+	private JTextField tfop8;
+	private JTextField tfsum;
+	private JTextField tfsub;
+	private JTextField tfmul;
+	private JTextField tfdiv;
+	private JButton btnque1;
+	private JButton btnque2;
+	private JButton btnque3;
+	private JButton btnque4;
+	public AddFrame() {
+		JLabel ladd=new JLabel("+");
+		JLabel lsub=new JLabel("-");
+		JLabel lmul=new JLabel("*");
+		JLabel ldiv=new JLabel("÷");
+		btnque1=new JButton("=");
+		btnque2=new JButton("=");
+		btnque3=new JButton("=");
+		btnque4=new JButton("=");
+		tfop1=new JTextField(10);
+		tfop2=new JTextField(10);
+		tfop3=new JTextField(10);
+		tfop4=new JTextField(10);
+		tfop5=new JTextField(10);
+		tfop6=new JTextField(10);
+		tfop7=new JTextField(10);
+		tfop8=new JTextField(10);
+		tfsum=new JTextField(20);
+		tfsub=new JTextField(20);
+		tfmul=new JTextField(20);
+		tfdiv=new JTextField(20);
+		setTitle("运算器");
+		//setBounds(200,300,300,320);
+		//pack();
+		setSize(300,200);
+		setLocation(500,400);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		tfop1.setHorizontalAlignment(JTextField.RIGHT);
+		tfop2.setHorizontalAlignment(JTextField.RIGHT);
+		tfop3.setHorizontalAlignment(JTextField.RIGHT);
+		tfop4.setHorizontalAlignment(JTextField.RIGHT);
+		tfop5.setHorizontalAlignment(JTextField.RIGHT);
+		tfop6.setHorizontalAlignment(JTextField.RIGHT);
+		tfop7.setHorizontalAlignment(JTextField.RIGHT);
+		tfop8.setHorizontalAlignment(JTextField.RIGHT);
+		tfsum.setHorizontalAlignment(JTextField.RIGHT);
+		tfsub.setHorizontalAlignment(JTextField.RIGHT);
+		tfmul.setHorizontalAlignment(JTextField.RIGHT);
+		tfdiv.setHorizontalAlignment(JTextField.RIGHT);
+		btnque1.addActionListener(this);
+		btnque2.addActionListener(this);
+		btnque3.addActionListener(this);
+		btnque4.addActionListener(this);
+		JPanel p=new JPanel();
+		p.setLayout(new GridLayout(4,5,15,10));
+		//add
+		p.add(tfop1);
+		p.add(ladd);
+		p.add(tfop2);
+		p.add(btnque1);
+		p.add(tfsum);
+		//sub
+		p.add(tfop3);
+		p.add(lsub);
+		p.add(tfop4);
+		p.add(btnque2);
+		p.add(tfsub);
+		//mul
+		p.add(tfop5);
+		p.add(lmul);
+		p.add(tfop6);
+		p.add(btnque3);
+		p.add(tfmul);
+		//div
+		p.add(tfop7);
+		p.add(ldiv);
+		p.add(tfop8);
+		p.add(btnque4);
+		p.add(tfdiv);
+		setContentPane(p);
+	}
+	public void actionPerformed(ActionEvent event) {
+		try {
+			int sum,sub,mul;
+			double div;
+			if(event.getSource()==btnque1) {
+				sum=Integer.parseInt(tfop1.getText())+Integer.parseInt(tfop2.getText());
+				tfsum.setText(sum+"");
+			}else if(event.getSource()==btnque2){
+				sub=Integer.parseInt(tfop3.getText())-Integer.parseInt(tfop4.getText());
+				tfsub.setText(sub+"");
+			}else if(event.getSource()==btnque3){
+				mul=Integer.parseInt(tfop5.getText())*Integer.parseInt(tfop6.getText());
+				tfmul.setText(mul+"");
+			}
+			else if(event.getSource()==btnque4){
+				div=Double.parseDouble(tfop7.getText())/Double.parseDouble(tfop8.getText());
+				tfdiv.setText(div+"");
+			}
+		}catch(Exception e) {
+			JOptionPane.showMessageDialog(null, e.toString());
+		}
+	}	
+}
