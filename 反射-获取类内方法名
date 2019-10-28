@@ -1,0 +1,28 @@
+import java.lang.reflect.*;
+import java.util.Scanner;
+/*
+ * 利用反射
+ * 返回某个类中定义的所有方法名字
+ * */
+
+public class reflect {
+
+	public static void main(String[] args) {
+		try{
+			System.out.println("输入java类的名称：");
+			Scanner input =new Scanner(System.in);
+			String classname=input.next();
+			Class c=Class.forName(classname);
+			Method m[]=c.getDeclaredMethods();
+			System.out.println("类"+classname+"的方法包括：");
+			for(int i=0;i<m.length;i++){
+				System.out.println(m[i].toString());
+			}
+		}catch (Throwable e){
+			System.err.println(e);
+	}
+		
+
+	}
+
+}
