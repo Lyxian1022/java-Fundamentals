@@ -1,0 +1,43 @@
+package test3;
+import java.io.*;
+/*
+ * 自定义异常
+ * 当游戏人物的ph值为0时，若受到攻击会抛出异常
+ * 异常名字：EnemyisdeadException
+ * */
+public class Hero {
+
+	
+		public String name;
+		protected int ph;
+		public void attack(Hero h) throws EnemyisdeadException{
+			if(h.ph==0){
+				throw new EnemyisdeadException(h.name+"已经挂了，不要再打了~");
+			}
+		}
+		class EnemyisdeadException extends Exception{
+			public EnemyisdeadException(){
+				
+			}
+			public EnemyisdeadException(String msg){
+				super(msg);
+			}
+			
+		}
+
+	public static void main(String[] args) {
+		Hero green=new Hero();
+		green.name="盖伦";
+		green.ph=660;
+		Hero teemo=new Hero();
+		teemo.name="提莫";
+		teemo.ph=0;
+		try{
+			green.attack(teemo);
+		}catch(EnemyisdeadException e){
+			System.out.println("异常的具体原因是"+e.getMessage());
+			e.printStackTrace();
+		}
+	}
+
+}
