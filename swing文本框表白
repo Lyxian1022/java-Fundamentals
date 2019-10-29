@@ -1,0 +1,11 @@
+import javax.swing.*;
+/*
+ * 文本框表白
+ * */
+
+public class test {
+	public static void main(String[] args){
+		String s=JOptionPane.showInputDialog("请输入你想表白的话：");
+		JOptionPane.showMessageDialog(null, "大晴晴，"+s);
+ }
+}
