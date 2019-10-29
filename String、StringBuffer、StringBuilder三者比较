@@ -1,0 +1,42 @@
+/*
+ *String、StringBuffer、StringBuilder三者比较
+ *都添加元素100，000次
+ *结果显示，速度上StringBuilder>StringBuffer>String
+ *StringBuffer是线程安全的
+ * */
+
+public class test {
+	public static void main(String[] args) {
+		//String
+		long start1=System.currentTimeMillis();
+		
+		for(int i=0;i<100000;i++){
+			String str="a";
+			str +="b";
+		}
+		long end1=System.currentTimeMillis();
+		System.out.println(end1-start1);
+		
+		//StringBuffer
+		long start2=System.currentTimeMillis();
+		
+		for(int i=0;i<100000;i++){
+			StringBuffer a=new StringBuffer().append("a");
+			a.append("b");
+		}
+		long end2=System.currentTimeMillis();
+		System.out.println(end2-start2);
+		
+		//StringBuilder
+		long start3=System.currentTimeMillis();
+		
+		for(int i=0;i<100000;i++){
+			StringBuilder c=new StringBuilder().append("a");
+			c.append("b");
+		}
+		long end3=System.currentTimeMillis();
+		System.out.println(end3-start3);
+		
+		
+}
+}
