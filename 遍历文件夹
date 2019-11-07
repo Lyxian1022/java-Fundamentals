@@ -1,0 +1,40 @@
+package Game;
+/*
+ * 遍历文件夹内所有文件
+ * 找出最大的，给出大小
+ * 找出最小的，给出大小
+ * */
+import java.io.File;
+
+public class TextFile {
+	public static long maxlen=0;
+	public static long minlen=Integer.MAX_VALUE;
+	public static File maxfile=null;
+	public static File minfile=null;
+	
+	public static void choice(File file) {
+		if(file.isFile()) {
+			if(maxlen<file.length()) {
+				maxlen=file.length();
+				maxfile=file;
+			}
+			if(minlen>file.length()&&file.length()!=0) {
+				minlen=file.length();
+				minfile=file;
+			}
+		}
+		if(file.isDirectory()) {
+			File[] fs=file.listFiles();
+			for(File f:fs)
+				choice(f);
+		}
+	}
+	public static void main(String[] args) {
+		File f1=new File("/Users/liyaxian/Documents/JAVA/Game/Filetext");
+		choice(f1);
+		System.out.println("最大的文件是："+maxfile.getAbsolutePath());
+		System.out.println("最大文件的尺寸是："+maxlen);
+		System.out.println("the small file is:"+minfile.getAbsolutePath());
+		System.out.println("size of small file is:"+minlen);
+	}
+}
