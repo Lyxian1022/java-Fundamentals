@@ -1,0 +1,27 @@
+package Game;
+/*
+ * 文件常用操作2
+ * */
+import java.io.File;
+
+public class TextFile {
+
+	public static void main(String[] args) {
+		File f1=new File("/Users/liyaxian/Documents/JAVA/Game/Filetext");
+		//以字符串数组的形式返回文件个数（不包括子文件、子文件夹）
+		f1.list();
+		String[] a=f1.list();
+		for(int i=0;i<a.length;i++)
+			System.out.println(a[i]);
+		//以文件数组的形式返回文件个数（不包括子文件、子文件夹）
+		f1.listFiles();
+		File[] fs=f1.listFiles();
+		for(int i=0;i<fs.length;i++)
+			System.out.println(fs[i]);
+		//创建文件夹
+		f1.mkdir();
+		//列出所有盘符 c：、d：等等
+		f1.listRoots();
+	}
+
+}
