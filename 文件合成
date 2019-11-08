@@ -1,0 +1,30 @@
+package Game;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.*;
+/*
+ * 把拆分后的小文件拼接成一个大文件
+ * */
+public class Compose {
+	public static void main(String[] args) {
+		
+		try {	File fw0=new File("/Users/liyaxian/Desktop/ex1data2.txt");
+				File fw=new File("/Users/liyaxian/Desktop/DDDD.txt");
+				byte[] wridate=new byte[(int)fw0.length()];
+			for(int i=0;i<3;i++) {
+				
+				File f=new File("/Users/liyaxian/Desktop/ex1data2.txt"+i);
+				byte[] date=new byte[(int)f.length()];
+				FileInputStream fi=new FileInputStream(f);
+				fi.read(date);
+				System.arraycopy(date, 0, wridate, i*((int)f.length()), (int)f.length());   
+				fi.close();
+			}
+				FileOutputStream fos=new FileOutputStream(fw);
+				fos.write(wridate);
+				fos.close();	
+		}catch(IOException e) {
+			e.printStackTrace();
+		}
+	}
+}
