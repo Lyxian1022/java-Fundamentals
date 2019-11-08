@@ -1,0 +1,41 @@
+package Game;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.*;
+/*
+ * 把文件拆分成几个小文件
+ * */
+public class Clip {
+	public static void main(String[] args) {
+		File f=new File("/Users/liyaxian/Desktop/D19102540282.pdf");
+		try {
+			FileInputStream fi=new FileInputStream(f);
+			
+			int k=1000*1024;
+			//numbers of file
+			int num=(int)(f.length()/k);
+			byte[] alldate=new byte[(int)(f.length())];
+			byte[] wridate;
+			fi.read(alldate);
+			for(int i=0;i<num+1;i++) {
+				if(i==num) {
+					 wridate=new byte[(int)f.length()-k*num];
+					System.arraycopy(alldate, i*k, wridate, 0, ((int)f.length()-k*num));
+				}else {
+					wridate=new byte[k];
+					System.arraycopy(alldate, i*k, wridate, 0, k);
+				}
+				File fr=new File("/Users/liyaxian/Desktop/D19102540282.pdf"+i);
+				FileOutputStream fos=new FileOutputStream(fr);
+				fos.write(wridate);
+				fos.close();
+				fi.close();
+			}
+			
+			
+		}catch(IOException e) {
+			e.printStackTrace();
+		}
+		
+	}
+}
