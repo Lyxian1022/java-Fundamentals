@@ -1,0 +1,29 @@
+package Game;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.*;
+
+
+/*
+ * 以字节流的方式读写文件
+ * */
+public class ReadWrite {
+	public static void main(String[] args) {
+		File f=new File("/Users/liyaxian/Documents/JAVA/Game/Filetext/111.txt");
+		try {
+			FileInputStream fi=new FileInputStream(f);
+			byte[] all1=new byte[(int)(f.length())];
+			fi.read(all1);
+			for(byte b:all1)
+				System.out.println(b);
+			fi.close();
+			byte[] all2= {88,89};
+			FileOutputStream fr=new FileOutputStream(f);
+			fr.write(all2);
+			fr.close();
+		}catch(IOException e) {
+			e.printStackTrace();
+		}
+		
+	}
+}
