@@ -1,0 +1,58 @@
+package Game;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+/*
+ * 文件加密解密
+ * fileencode方法里，operate为true则加密
+ * operate为false则解密
+ * */
+
+public class Encode {
+	public static void fileencode(File fencoding,File fencoded,boolean operate) {
+		try (FileReader fr=new FileReader(fencoding);FileWriter fw=new FileWriter(fencoded)){
+			if(operate==true) {
+				for(int i=0;i<(int)fencoding.length();i++) {		
+				char fread=(char)fr.read();
+				if(fread=='9') {
+					fread='0';
+				}else if(fread=='z') {
+					fread='a';
+				}else if(fread=='Z') {
+					fread='A';
+				}else if((fread>='a'&&fread<='y')||(fread>='A'&&fread<='Y')||(fread>='0'&&fread<='8')){
+					fread=(char)((int)fread+1);
+				}
+				fw.write(fread);
+			}
+		}
+			if(operate==false) {
+				for(int i=0;i<(int)fencoding.length();i++) {
+			
+				char fread=(char)fr.read();
+				if(fread=='0') {
+					fread='9';
+				}else if(fread=='a') {
+					fread='z';
+				}else if(fread=='A') {
+					fread='Z';
+				}else if((fread>='b'&&fread<='z')||(fread>='B'&&fread<='Z')||(fread>='1'&&fread<='9')){
+					fread=(char)((int)fread-1);
+				}
+				fw.write(fread);
+			}
+		}
+			
+		}catch(IOException e) {
+			e.printStackTrace();
+		}
+	}
+	public static void main(String[] args) {
+		File fencoding=new File("/Users/liyaxian/Documents/JAVA/Game/Filetext/1e.txt");
+		File fencoded=new File("/Users/liyaxian/Documents/JAVA/Game/Filetext/1ed.txt");
+		//false是解密，true是加密
+		fileencode(fencoding,fencoded,false);
+	}
+
+}
