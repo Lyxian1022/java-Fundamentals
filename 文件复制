@@ -1,0 +1,36 @@
+package Game;
+/*
+ * 构造copyfile()方法实现文件的复制
+ * */
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.BufferedReader;
+import java.io.PrintWriter;
+import java.io.IOException;
+
+public class Copyfile {
+	public static void copyfile(String src,String dest) {
+		File srcf=new File(src);
+		File desf=new File(dest); 
+		try(	FileReader fr=new FileReader(srcf);
+				BufferedReader br=new BufferedReader(fr);
+				FileWriter fw=new FileWriter(desf);
+				PrintWriter pw=new PrintWriter(fw);
+			){
+			String data=null;
+			char[] alldata=new char[src.length()];
+			while((data=br.readLine())!=null) {
+				alldata=data.toCharArray();
+				pw.println(alldata);
+			}
+		}catch(IOException e) {
+			e.printStackTrace();
+		}
+		
+	}
+	public static void main(String[] args) {
+		copyfile("/Users/liyaxian/Documents/JAVA/Game/Filetext/new.txt",
+				"/Users/liyaxian/Documents/JAVA/Game/Filetext/copyfile.txt");
+	}
+}
