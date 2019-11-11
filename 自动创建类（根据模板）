@@ -1,0 +1,51 @@
+package Game;
+/*
+ * 根据模板文件自动创建类
+ * */
+import java.io.IOException;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.BufferedReader;
+import java.io.PrintWriter;
+import java.util.Scanner;
+import java.io.File;
+
+public class Inputstream {
+
+	public static void main(String[] args) {
+		Scanner s=new Scanner(System.in);
+		System.out.println("请输入类名称：");
+		String classname=s.nextLine();
+		System.out.println("请输入属性类型：");
+		String typename=s.nextLine();
+		System.out.println("请输入属性的名称：");
+		String name=s.nextLine();
+		File modf=new File("/Users/liyaxian/Documents/JAVA/Game/Filetext/mod.txt");
+		File newf=new File("/Users/liyaxian/Documents/JAVA/Game/Filetext/new.txt");
+		try(	FileReader fr=new FileReader(modf);
+				BufferedReader br=new BufferedReader(fr);
+				FileWriter fw=new FileWriter(newf);
+				PrintWriter pw=new PrintWriter(fw);
+			){
+			System.out.println("自动生成的类：");
+			String rl=null;
+			while((rl=br.readLine())!=null) {
+				if(rl.contains("@class@"))
+					rl=rl.replace("@class@",classname);
+				if(rl.contains("@type@"))
+					rl=rl.replace("@type@",typename);
+				if(rl.contains("@property@"))
+					rl=rl.replace("@property@",name);
+				pw.println(rl);
+				System.out.println(rl);
+			}
+		
+		}catch(IOException e) {
+			e.printStackTrace();
+		}finally {
+			s.close();
+		}
+		
+	}
+
+}
