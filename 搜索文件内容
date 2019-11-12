@@ -1,0 +1,39 @@
+package Game;
+/*
+ * 搜索文件内的内容
+ * */
+import java.io.FileInputStream;
+import java.io.File;
+import java.io.IOException;
+
+public class Search {
+	public static void searfile(File folder,String copy) {
+		if(folder.isDirectory()) {
+			File[] fs=folder.listFiles();
+			for(File f:fs)
+				searstr(f,copy);
+		}
+	}
+	
+	public static void searstr(File file,String copy) {
+		try(	FileInputStream fis=new FileInputStream(file);){
+			byte[] alldata=new byte[(int)file.length()];
+			fis.read(alldata);
+			String line=new String(alldata);
+				if(line.contains(copy)) {
+					System.out.println("find the string "+copy+",在文件"+file.getAbsolutePath());
+				}
+				
+			
+		}catch(IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public static void main(String[] args) {
+		File f=new File("/Users/liyaxian/Documents/JAVA/Game/src/Game");
+		searfile(f,"copy");
+		System.out.println("成功");
+	}
+
+}
