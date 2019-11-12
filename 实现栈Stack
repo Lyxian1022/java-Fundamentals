@@ -1,0 +1,43 @@
+package Game;
+/*
+ * 利用LinkedList实现stack栈
+ * */
+import java.util.LinkedList;
+
+interface Stack {
+    //把英雄推入到最后位置
+    public void push(String h);
+    //把最后一个英雄取出来
+    public String pull();
+    //查看最后一个英雄
+    public String peek();
+}
+public class Mystack implements Stack{
+	private static LinkedList<String> list=new LinkedList<>();
+	public void push(String s) {
+		list.addLast(s);
+	}
+	public String pull() {
+		return list.pollLast();
+	}
+	public String peek() {
+		return list.peekLast();
+	}
+	
+	
+	public static void main(String[] args) {
+		Mystack ms=new Mystack();
+		//压入5个元素
+		for(int i=0;i<5;i++) {
+			ms.push("ho"+i);
+			System.out.println("压入"+ms.peek());
+			System.out.println("当前栈内元素"+list);
+		}
+		//弹出五个元素
+		for(int i=0;i<5;i++) {
+			System.out.println("取出："+ms.pull());
+			System.out.println("当前的栈："+list);
+		}
+	}
+
+}
