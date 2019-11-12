@@ -1,0 +1,27 @@
+package Game;
+/*
+ * LinkdeList双向链表
+ * 链表就像佛珠，只关心前面一个和后面一个，剩下不关心
+ * 所以可以在头插入元素
+ * 也可以在尾插入元素
+ * */
+import java.util.LinkedList;
+
+public class Arrlist {	
+	public static void main(String[] args) {
+		LinkedList<String> hero=new LinkedList<String>();
+		hero.addLast("hi1");
+		hero.addLast("hi2");
+		hero.addFirst("hiX");
+		System.out.println(hero);
+		//查看不会删除元素
+		System.out.println(hero.getFirst());
+		System.out.println(hero.getLast());
+		System.out.println(hero);
+		//取出会删除元素
+		System.out.println(hero.removeFirst());
+		System.out.println(hero);
+		
+	}
+
+}
