@@ -1,0 +1,58 @@
+package Game;
+/*
+ * 构造方法复制文件夹
+ * 复制文件夹以及文件夹内所有文件
+ * */
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.BufferedReader;
+import java.io.PrintWriter;
+import java.io.IOException;
+
+public class Copyfolder {
+	public static void copyfile(String src,String dest) {
+		File srcf=new File(src);
+		File desf=new File(dest); 
+		try(	FileReader fr=new FileReader(srcf);
+				BufferedReader br=new BufferedReader(fr);
+				FileWriter fw=new FileWriter(desf);
+				PrintWriter pw=new PrintWriter(fw);
+			){
+			String data=null;
+			char[] alldata=new char[src.length()];
+			while((data=br.readLine())!=null) {
+				alldata=data.toCharArray();
+				pw.println(alldata);
+			}
+		}catch(IOException e) {
+			e.printStackTrace();
+		}
+		
+	}
+	public static void copyfolder(String src,String des) {
+		File srcf=new File(src);
+		File desf=new File(des);
+		if(desf.isFile())
+			return;
+		if(!desf.exists())
+			desf.mkdirs();
+		
+		File[] fs=srcf.listFiles();
+		for(File s:fs) {
+		if(s.isFile()) {
+			File newfile=new File(desf,s.getName());
+			copyfile(s.getAbsolutePath(),newfile.getAbsolutePath());
+		}
+		if(s.isDirectory()) {
+				File newfolder=new File(desf,s.getName());
+				copyfolder(s.getAbsolutePath(),newfolder.getAbsolutePath());		
+		}
+		}
+	}
+	public static void main(String[] args) {
+		copyfolder("/Users/liyaxian/Documents/JAVA/Game/Filetext/1",
+				"/Users/liyaxian/Documents/JAVA/Game/Filetext/11"); 
+	}
+
+}
