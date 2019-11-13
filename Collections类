@@ -1,0 +1,32 @@
+package a2019_11_13;
+/*
+ *首先初始化一个List,长度是10，值是0-9。
+ *然后不断的shuffle，直到前3位出现
+ *3 1 4
+ *shuffle 1000,000 次，统计出现的概率
+ */
+import java.util.List;
+import java.util.ArrayList;
+import java.util.Collections;
+
+public class Testcollections {
+
+	public static void main(String[] args) {
+		List<Integer> list=new ArrayList<>();
+		for(int i=0;i<10;i++) {
+			list.add(i);
+		}
+		System.out.println("初始化的列表\n"+list);
+		//shuffle1000,000次
+		int count=0;
+		for(int i=0;i<1000000;i++) {
+			Collections.shuffle(list);
+			if(list.get(0)==3&&list.get(1)==1&&list.get(2)==4)
+				count++;
+		}
+		System.out.println("前三位是“314”的列表一共出现了"+count+"次");
+		System.out.println("概率是"+(count/1000000.0));
+		
+	}
+
+}
