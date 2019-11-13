@@ -1,0 +1,58 @@
+package Game;
+/*
+ * 初始化3,000,000个英雄
+ * 名称为hero-xxxx.因此每个英雄的名称都有重复
+ * 1.用for循环找出所有名称为hero-5555的对象 
+ * 2.用HashMap找出所有名称为hero-5555的对象
+ * 分别统计所消耗时间,有291个重名对象的时候for用时59毫秒，HashMap用时461毫秒
+ * */
+import java.util.HashMap;
+import java.util.List;
+import java.util.ArrayList;
+public class Hashmap {
+	
+	public static void main(String[] args) {
+		//初始化3,000,000个英雄
+		long startini=System.currentTimeMillis();
+		List<Hero> heros=new ArrayList<>();
+		HashMap<Integer,Hero> hm=new HashMap<>();
+		for(int i=0;i<3000000;i++) {
+			Hero hero=new Hero();
+			int num=(int)(Math.random()*10000);
+			hero.name="hero-"+num;
+			heros.add(hero);
+			hm.put(i, hero);
+		}
+		long endini=System.currentTimeMillis();
+		System.out.println("初始化一共用时"+(endini-startini)+"耗秒");
+		//For循环
+		int count=0;
+		long startfor=System.currentTimeMillis();
+		for(int i=0;i<heros.size();i++) {
+			if(heros.get(i).name.equals("hero-5555"))
+				count++;		
+		}
+		long endfor=System.currentTimeMillis();
+		if(count!=0)
+			System.out.println(count);
+		else
+			System.out.println("Don't have hero-5555");
+		System.out.println("for循环用时"+(endfor-startfor)+"毫秒");
+		//HashMap查找
+		int count2=0;
+		long startha=System.currentTimeMillis();
+		for(int i=0;i<3000000;i++) {
+			if(hm.get(i).name.equals("hero-5555"))
+				count2++;
+		}
+		long endha=System.currentTimeMillis();
+		if(count!=0)
+			System.out.println(count2);
+		else
+			System.out.println("Don't have hero-5555");
+		
+		System.out.println("HashMap循环用时"+(endha-startha)+"毫秒");
+		
+	}
+	}
+
