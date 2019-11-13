@@ -1,0 +1,22 @@
+package Game;
+import java.util.HashSet;
+import java.util.Iterator;
+public class Hashset {
+
+	public static void main(String[] args) {
+		HashSet<Integer> hs=new HashSet<>();
+		for(int i=0;i<5;i++) {
+			hs.add(i+5);
+		}
+		//用for查看HashSet内的元素
+		for(Integer i:hs)
+			System.out.println(i);
+		//用迭代器Iterator查看HashSet内的元素
+		for(Iterator<Integer> it=hs.iterator();it.hasNext();){
+			Integer i=(Integer)it.next();
+			System.out.println(i);
+		}
+			
+	}
+
+}
