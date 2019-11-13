@@ -1,0 +1,83 @@
+package Game;
+/*
+ * 初始化10位英雄，每位英雄有name、hp属性
+ * 1.把英雄添加进二叉树
+ * 2.按血量hp进行倒排序
+ * 3.输出排序结果
+ * */
+import java.util.List;
+import java.util.ArrayList;
+
+public class Heronode {
+	public Heronode leftnode;
+	public Heronode rightnode;
+	public Hero value;
+	
+	//给二叉树填值
+	public void add(Hero hero) {
+		if(value==null)
+			value=hero;
+		else {
+			if(hero.hp>value.hp) {
+				if(leftnode==null)
+					leftnode=new Heronode();
+				leftnode.add(hero);
+			}else {
+					if(rightnode==null)
+						rightnode=new Heronode();
+					rightnode.add(hero);
+				}
+			}
+	}
+	
+	//排序输出
+	public List<Hero> values(){
+		List<Hero> values=new ArrayList<>();
+		if(leftnode!=null) {
+			values.addAll(leftnode.values());
+		}
+		values.add(value);
+		if(rightnode!=null) {
+			values.addAll(rightnode.values());
+		}
+		return values;
+	}
+	
+	public static void main(String[] args) {
+		List<Hero> heros=new ArrayList<>();
+		//英雄的初始化
+		System.out.println("排序前英雄榜");
+		for(int i=0;i<10;i++) {
+			Hero hero=new Hero();
+			hero.name="ho"+i;
+			hero.hp=(int)(Math.random()*1000);
+			heros.add(hero);
+			System.out.println("name "+hero.name+" hp "+hero.hp);
+		}
+		System.out.println("*************");
+		//把英雄插入二叉树
+		Heronode hn=new Heronode();
+		for(Hero h:heros)
+			hn.add(h);
+		
+		//按照hp值进行倒排序输出
+		System.out.println("排序后英雄榜");
+		List<Hero> result=hn.values();
+		for(Hero l:result)
+			System.out.println(l.tostring());
+	}
+
+}
+class Hero {
+	public String name;
+	public int hp;
+	public Hero() {
+		
+	}
+	public Hero(String name) {
+		this.name=name;
+	}
+	public String tostring() {
+		return "name "+name+" hp "+hp;
+	}
+}
