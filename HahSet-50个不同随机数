@@ -1,0 +1,24 @@
+package a2019_11_13;
+import java.util.HashSet;
+/*
+ * HasSet应用
+ * 随机生成50个不同的随机数
+ * Set里面的数据不能重复
+ * 里面的元素顺序不定
+ * List里面的顺序是定的
+ */
+public class Hashset {
+
+	public static void main(String[] args) {
+		HashSet<Integer> rand=new HashSet<>();
+		
+		while(true) {
+			int r=(int)(Math.random()*10000);
+			rand.add(r);
+			if(rand.size()==50)
+				break;
+		}
+		System.out.println(rand);
+	}
+
+}
