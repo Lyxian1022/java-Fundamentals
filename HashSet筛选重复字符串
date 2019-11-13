@@ -1,0 +1,59 @@
+package Game;
+/*使用HashSet查找重复的字符串
+*创建一个长度是100的字符串数组
+*使用长度是2的随机字符填充该字符串数组
+*用HashSrt统计这个字符串数组里重复的字符串有多少种
+ */
+import java.util.HashSet;
+
+public class Hashset {
+
+  //随机生成字符串的方法
+	public static String randchar(int len) {
+		char[] ch=new char[len];
+		int min='0';
+		int max='z'+1;
+		for(int i=0;i<ch.length;i++) {
+			while(true) {
+				char rand=(char)(Math.random()*(max-min)+min);
+				if(Character.isLetterOrDigit(rand)){
+					ch[i]=rand;
+					break;
+				}
+			}
+		}
+		String result=new String(ch);
+		return result;
+	}
+	
+	public static void main(String[] args) {
+		String [] str=new String[100];
+		System.out.println("初始化后的数组为：");
+		for(int i=0;i<str.length;i++) {
+			str[i]=randchar(2);
+			System.out.print(str[i]+" ");
+			if((i+1)%20==0)
+				System.out.println();
+		}
+		//筛选重复字符串，把重复的写进HashSet
+		HashSet<String> result=new HashSet<>();
+		for(int i=0;i<str.length;i++) {
+			for(int j=i+1;j<str.length;j++) {
+				if(str[i].equalsIgnoreCase(str[j]))
+					result.add(str[i]);
+			}
+		}
+		//打印重复字符串
+		if(result.size()==0)
+			System.out.println("字符列表里没有重复的鸭~");
+		else {
+			System.out.println("一共有 "+result.size()+" 个字符串重复，分别是：");
+			for(String s:result)
+				System.out.print(s+" ");	
+		}		
+	}
+}
+
+
+
+
