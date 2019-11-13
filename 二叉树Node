@@ -33,6 +33,7 @@ public class Node {
 			}
 		}
 	}
+	//排序输出
 	public List<Object> values(){
 		List<Object> values=new ArrayList<>();
 		if(leftnode!=null)
