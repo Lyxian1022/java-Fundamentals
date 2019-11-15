@@ -1,0 +1,22 @@
+import java.util.LinkedHashSet;
+/*
+利用LinkedHashSet的顺序存放和不重复特性
+将PI中的数字存放起来
+*/
+import java.util.TreeSet;
+
+public class LinkedHashset {
+
+	public static void main(String[] args) {
+		   LinkedHashSet<Integer> lhs=new LinkedHashSet<>();
+		        double pi=Math.PI;
+		        System.out.println(pi);
+		        while(lhs.size()<9) {
+		        	int mark=(int)(pi%10);
+		        	lhs.add(mark);
+		        	 pi=pi*10;
+		        }
+		        System.out.println(lhs);       
+	}
+
+}
