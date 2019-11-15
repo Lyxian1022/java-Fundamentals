@@ -1,0 +1,17 @@
+//随机生成len位的字符串
+	public static String randchar(int len) {
+		char[] ch=new char[len];
+		int min='0';
+		int max='z'+1;
+		for(int i=0;i<ch.length;i++) {
+			while(true) {
+				char rand=(char)(Math.random()*(max-min)+min);
+				if(Character.isLetterOrDigit(rand)){
+					ch[i]=rand;
+					break;
+				}
+			}
+		}
+		String result=new String(ch);
+		return result;
+	}
