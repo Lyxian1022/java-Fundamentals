@@ -1,0 +1,57 @@
+package a2019_11_13;
+/*
+ * 如果字符串长度是0，则返回0。
+否则： 获取每一位字符，转换成数字后，相加，最后乘以23
+(s[0]+ s[1] + s[2] + s[3]+ s[n-1])*23.
+如果值超过了1999，则取2000的余数，保证落在0-1999之间。
+如果是负数，则取绝对值。
+随机生成长度是2-10的不等的100个字符串，打印用本hashcode获取的值分别是多少
+ */
+public class Hashcode {
+	//hashcode生成算法
+	public static int hashcode(String str) {
+		if(str.length()==0)
+			return 0;
+		else {
+			int sum=0;
+			char[] ch=str.toCharArray();
+			for(int i=0;i<ch.length;i++) {
+				sum += (int)ch[i];
+			}
+			int result=sum*23;
+			if(result>1999)
+				result=result%2000;
+			if(result<0)
+				result=Math.abs(result);
+			return result;
+		}
+	}
+	//随机生成len位的字符串
+	public static String randchar(int len) {
+		char[] ch=new char[len];
+		int min='0';
+		int max='z'+1;
+		for(int i=0;i<ch.length;i++) {
+			while(true) {
+				char rand=(char)(Math.random()*(max-min)+min);
+				if(Character.isLetterOrDigit(rand)){
+					ch[i]=rand;
+					break;
+				}
+			}
+		}
+		String result=new String(ch);
+		return result;
+	}
+	public static void main(String[] args) {
+		for(int i=0;i<100;i++) {
+			int num=(int)(Math.random()*10+1);
+			String str=randchar(num);
+			int hc=hashcode(str);
+			System.out.printf("%s 的hashcode是 %d\t\t",str,hc);
+			if((i+1)%2==0)
+				System.out.println();
+		}
+	}
+
+}
