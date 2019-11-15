@@ -1,0 +1,32 @@
+package a2019_11_13;
+/*
+ * 对比ArrayList和LinkedList的区别
+ * 在第一个插入添加元素100,000次，统计用时
+ * ArrayList每次在前面插入一个元素，后面所有元素都要重排，所以慢 用时946ms
+ * LinkedList插入元素只需要把原有的连接打开重连即可，后面的无需变动，所以快 用时10ms
+ */
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
+
+public class ArrayLinked {
+
+	public static void main(String[] args) {
+		List<Integer> ad;
+		ad=new ArrayList<>();
+		addfirst(ad,"ArrayList");
+		ad=new LinkedList<>();
+		addfirst(ad,"LinkedList");
+	}
+	public static void addfirst(List<Integer> ad,String type) {
+		int count=100*1000;
+		final int num=5;
+		long start=System.currentTimeMillis();
+		for(int i=0;i<count;i++) {
+			ad.add(0,num);
+		}
+		long end=System.currentTimeMillis();
+		System.out.printf("%s共用时%d毫秒\n",type,(end-start));
+	}
+
+}
