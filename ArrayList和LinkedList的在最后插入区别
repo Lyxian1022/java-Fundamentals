@@ -1,0 +1,58 @@
+package a2019_11_13;
+/*
+ * 对比ArrayList和LinkedList的区别
+ * 在最后面插入数据，100,000次，统计用时
+ * ArrayList顺序结构，需要增大List容量，慢。用时14ms
+ * LinkedList直接连接，快。用时5ms
+ */
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
+
+public class ArrayLinked {
+
+	public static void main(String[] args) {
+		List<Integer> ad;
+		ad=new ArrayList<>();
+		addlast(ad,"ArrayList");
+		ad=new LinkedList<>();
+		addlast(ad,"LinkedList");
+	}
+	public static void addfirst(List<Integer> ad,String type) {
+		int count=100*1000;
+		final int num=5;
+		long start=System.currentTimeMillis();
+		for(int i=0;i<count;i++) {
+			ad.add(0,num);
+		}
+		long end=System.currentTimeMillis();
+		System.out.printf("%s共用时%d毫秒\n",type,(end-start));
+	}
+	public static void modify(List<Integer>ad,String type) {
+		int num=100*1000;
+		int index=num/2;
+		//initiate
+		for(int i=0;i<num;i++) {
+			ad.add(5);
+		}
+		//定位修改放回
+		long start=System.currentTimeMillis();
+		for(int i=0;i<num;i++) {
+			int n=ad.get(index);
+			n++;
+			ad.add(index, n);
+		}
+		long end=System.currentTimeMillis();
+		System.out.printf("定位修改%d次，%s共用时%d毫秒\n", num,type,(end-start));
+	}
+	public static void addlast(List<Integer> ad,String type) {
+		int count=100*1000;
+		final int num=5;
+		long start=System.currentTimeMillis();
+		for(int i=0;i<count;i++) {
+			ad.add(num);
+		}
+		long end=System.currentTimeMillis();
+		System.out.printf("%s共用时%d毫秒\n",type,(end-start));
+	}
+}
