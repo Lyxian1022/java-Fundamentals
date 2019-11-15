@@ -1,0 +1,25 @@
+package a2019_11_13;
+/*
+ * 翻转HashMap里面的key和value的位置
+ */
+import java.util.HashMap;
+import java.util.Set;
+
+public class Hashmap {
+
+	public static void main(String[] args) {
+		HashMap<String,String> hero=new HashMap<>();
+		HashMap<String,String> mark=new HashMap<>();
+		hero.put("abc", "物理英雄");
+		hero.put("apc","魔法英雄");
+		hero.put("t","坦克");
+		System.out.println(hero);
+		Set<String> key=hero.keySet();
+		for(String s:key)
+			mark.put(hero.get(s), s);
+		hero.clear();
+		hero.putAll(mark);
+		System.out.println(hero);
+	}
+
+}
