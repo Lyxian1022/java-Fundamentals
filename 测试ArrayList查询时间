@@ -1,0 +1,36 @@
+/*
+1. 初始化2000,000个对象到ArrayList中
+2. 打乱容器中的数据顺序
+3. 进行10次查询，统计每一次消耗的时间
+由于目标对象所在位置不同，查找时间会有差别
+*/
+import java.util.List;
+import java.util.ArrayList;
+import java.util.Collections;
+public class Testarraylist {
+
+	public static void main(String[] args) {
+		List<Hero> heros=new ArrayList<>();
+		//列表初始化
+		for(int i=0;i<2000000;i++) {
+			Hero hero=new Hero();
+			hero.name="hero "+i;
+			heros.add(hero);
+		}
+		//打乱顺序查找
+		String mark="hero 1000000";
+		Collections.shuffle(heros);
+		for(int i=0;i<10;i++) {
+		long start=System.currentTimeMillis();
+		for(Hero h:heros) {
+			if(h.name.equals(mark)) {
+				System.out.println("Find it Successfully! hero 1000000");
+				break;
+			}
+		}
+		long end=System.currentTimeMillis();
+		System.out.println("第"+(i+1)+"次用时："+(end-start)+"毫秒。");
+		}
+	}
+
+}
