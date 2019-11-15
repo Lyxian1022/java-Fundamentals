@@ -1,0 +1,28 @@
+package a2019_11_13;
+/*
+使用HashMap 做同样的查找
+1. 初始化2000000个对象到HashMap中。
+2. 进行10次查询
+3. 统计每一次的查询消耗的时间
+可以观察到，几乎不花时间，花费的时间在1毫秒以内
+*/
+import java.util.HashMap;
+
+public class TestHashMap {
+
+	public static void main(String[] args) {
+		HashMap<String,Hero> hm=new HashMap<>();
+		for(int i=0;i<2000000;i++) {
+			Hero hero=new Hero("hero "+i);
+			hm.put(hero.name , hero);
+		}
+		for(int i=0;i<5;i++) {
+			long start=System.currentTimeMillis();
+			Hero target=hm.get("hero 1000000");
+			long end=System.currentTimeMillis();
+			System.out.println("Find it Successfully!");
+			System.out.println("cost "+(end-start)+"ms!");
+		}
+	}
+
+}
