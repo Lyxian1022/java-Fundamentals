@@ -1,0 +1,110 @@
+package a2019_11_17;
+/*
+ * 设计一个MyHashMap，实现接口IHashMap
+
+MyHashMap内部由一个长度是2000的对象数组实现。
+设计put(String key,Object value)方法
+首先通过上一个自定义字符串的hashcode练习获取到该字符串的hashcode,
+然后把这个hashcode作为下标，定位到数组的指定位置。 
+如果该位置没有数据，则把字符串和对象组合成键值对Entry，
+再创建一个LinkedList，把键值对，放进LinkedList中，最后把LinkedList 保存在这个位置。
+如果该位置有数据，一定是一个LinkedList,则把字符串和对象组合成键值对Entry，
+插入到LinkedList后面。
+
+设计 Object get(String key) 方法
+首先通过上一个自定义字符串的hashcode练习获取到该字符串的hashcode,
+然后把这个hashcode作为下标，定位到数组的指定位置。 
+如果这个位置没有数据，则返回空
+如果这个位置有数据，则挨个比较其中键值对的键-字符串，是否equals，
+找到匹配的，把键值对的值，返回出去。找不到匹配的，就返回空
+ */
+import java.util.LinkedList;
+import java.util.List;
+
+interface IHashMap {
+    public void put(String key,Object object);
+    public Object get(String key);
+}
+
+public class Myhashmap implements IHashMap{
+	
+	static LinkedList<Entry>[] entrys=new LinkedList[2000];
+	
+	public void put(String key,Object value) {
+		int code=hashcode(key);
+		Entry en=new Entry(key,value);
+		if(entrys[code]==null) {
+			entrys[code]=new LinkedList<Entry>();
+			entrys[code].add(en);
+		}else {
+			int flag=0;
+			for(Entry e:entrys[code]) {
+				if(e.key.equals(key)) {
+					e.value=value;
+					flag=1;
+					break;
+				}
+			}
+			if(flag==0) {
+				entrys[code].add(en);
+			}		
+		}
+	}
+	
+	public Object get(String key) {
+		int code=hashcode(key);
+		 
+		if(entrys[code]!=null) {
+			for(Entry e:entrys[code]) {
+				if(e.key.equals(key)) 
+					return e.value;
+			}
+		}
+		return null;
+	}
+	
+	//hashcode生成算法
+		public static int hashcode(String str) {
+			if(str.length()==0)
+				return 0;
+			else {
+				int sum=0;
+				char[] ch=str.toCharArray();
+				for(int i=0;i<ch.length;i++) {
+					sum += (int)ch[i];
+				}
+				int result=sum*23;
+				if(result>1999)
+					result=result%2000;
+				if(result<0)
+					result=Math.abs(result);
+				return result;
+			}
+		}
+		
+	public static void main(String[] args) {
+		Myhashmap mhp=new Myhashmap();
+		mhp.put("ad", "大美女");
+		mhp.put("bc", "大帅哥");
+		System.out.println(mhp.get("ad"));
+		System.out.println(mhp.get("bc"));
+		System.out.println(entrys[hashcode("ad")]);
+		
+	}
+
+}
+class Entry {
+	 
+    public Entry(Object key, Object value) {
+        super();
+        this.key = key;
+        this.value = value;
+    }
+    public Object key;
+    public Object value;
+    @Override
+    public String toString() {
+        return "[key=" + key + ", value=" + value + "]";
+    }
+     
+}
