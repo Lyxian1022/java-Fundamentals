@@ -1,0 +1,43 @@
+package a2019_11_13;
+/*
+初始化100000个对象到ArryList中。随机命名“hero-xxxx”
+1. 直接用for循环查找hero-5555
+2. 用Myhashmap查找hero-5555
+对比用时
+*/
+import java.util.ArrayList;
+import a2019_11_17.Myhashmap;
+
+public class Testmyhashmap{
+	public static void main(String[] args) {
+		ArrayList<Hero> heros=new ArrayList<>();
+		for(int i=0;i<100000;i++) {
+			int rand=(int)(Math.random()*10000);
+			Hero randhero=new Hero("hero-"+rand);
+			heros.add(randhero);
+		}
+		String target="hero-5555";
+		int count=0;
+		//直接用for查找
+		long startf=System.currentTimeMillis();
+		for(Hero h:heros) {
+			if(h.name.equals(target))
+				count++;
+		}
+		long endf=System.currentTimeMillis();
+		System.out.println("for:"+(endf-startf));
+		//用Myhashmap查找
+		Myhashmap mh=new Myhashmap();
+		long startm=System.currentTimeMillis();
+		
+			for(Hero h:heros) {
+				//if(h.name.equals(target))
+					
+					mh.put(h.name,h);
+			}
+
+		long endm=System.currentTimeMillis();
+		System.out.println("myhashmap:"+(endm-startm));
+		
+	}
+}
