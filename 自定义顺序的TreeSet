@@ -1,0 +1,31 @@
+package a2019_11_19;
+/*
+ * 自定义顺序的TreeSet
+ * if里面>：越来越大
+ * if里面<：越来越小
+ */
+import java.util.TreeSet;
+import java.util.Comparator;
+public class Testtreeset {
+
+	public static void main(String[] args) {
+		Comparator<Integer> c=new Comparator<Integer>() {
+			@Override
+			public int compare(Integer i1,Integer i2) {
+				if(i1<i2)
+					return 1;
+				else
+					return -1;
+			}
+		};
+		TreeSet<Integer> ts=new TreeSet<Integer>(c);
+		ts.add(3);
+		ts.add(6);
+		ts.add(1);
+		ts.add(98);
+		ts.add(2);
+		System.out.println(ts);
+
+	}
+
+}
