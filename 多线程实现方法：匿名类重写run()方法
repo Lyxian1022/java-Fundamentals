@@ -1,0 +1,39 @@
+package a2019_11_20;
+/*
+ * 多线程实现方法：匿名类重写run()方法
+ * 重写run方法，直接在run方法中写业务代码
+ */
+import java.util.Random;
+
+public class Attrachero {
+
+	public static void main(String[] args) {
+		Random r=new Random();
+		Hero 大晴=new Hero("大晴",150,50);
+		Hero 小先=new Hero("小先",150,50);
+		Hero 晴晴=new Hero("晴晴",150,50);
+		Hero 仙仙=new Hero("仙仙",150,50);
+		
+		Thread t1=new Thread() {
+			public void run() {
+				while(!小先.isdead()) {
+					大晴.attrachero(小先);
+				}
+			}
+		};
+		t1.start();
+		Thread t2=new Thread() {
+			public void run() {
+				while(!仙仙.isdead()) {
+					晴晴.attrachero(仙仙);
+				}
+			}
+		};
+		t2.start();
+	}
+
+}
+
+
+
+
