@@ -1,0 +1,38 @@
+package a2019_11_20;
+/*
+ * 多线程实现方法：继承Thread类
+ */
+import java.util.Random;
+
+public class Attrachero {
+
+	public static void main(String[] args) {
+		Random r=new Random();
+		Hero 大晴=new Hero("大晴",150,50);
+		Hero 小先=new Hero("小先",150,50);
+		Hero 晴晴=new Hero("晴晴",150,50);
+		Hero 仙仙=new Hero("仙仙",150,50);
+		
+		Killthread kt1=new Killthread(大晴,小先);
+		kt1.start();
+		Killthread kt2=new Killthread(晴晴,仙仙);
+		kt2.start();
+		
+		
+	}
+
+}
+class Killthread extends Thread{
+	private Hero h1;
+	private Hero h2;
+	public Killthread(Hero h1,Hero h2) {
+		this.h1=h1;
+		this.h2=h2;
+	}
+	public void run() {
+		while(!h2.isdead()) {
+			h1.attrachero(h2);
+		}
+	}
+}
+
