@@ -18,6 +18,7 @@ public class Testlambda {
 			System.out.println(h.tostring());
 		//匿名类
 		Herochecker checker=new Herochecker() {
+			@Override
 			public boolean test(Hero h) {
 				return (h.hp>50&&h.damage<50);
 			}
@@ -36,3 +37,9 @@ public class Testlambda {
 	
 	
 }
+
+
+
+
+
+
