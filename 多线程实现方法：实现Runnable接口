@@ -1,0 +1,40 @@
+package a2019_11_20;
+/*
+ * 多线程实现方法：实现Runnable接口
+ */
+import java.util.Random;
+
+public class Attrachero {
+
+	public static void main(String[] args) {
+		Random r=new Random();
+		Hero 大晴=new Hero("大晴",150,50);
+		Hero 小先=new Hero("小先",150,50);
+		Hero 晴晴=new Hero("晴晴",150,50);
+		Hero 仙仙=new Hero("仙仙",150,50);
+		
+		Battle bt1=new Battle(大晴,小先);
+		new Thread(bt1).start();
+		
+		Battle bt2=new Battle(晴晴,仙仙);
+		new Thread(bt2).start();
+	}
+
+}
+class Battle implements Runnable{
+	private Hero h1;
+	private Hero h2;
+	public Battle(Hero h1,Hero h2) {
+		this.h1=h1;
+		this.h2=h2;
+	}
+	public void run() {
+		while(!h2.isdead()) {
+			h1.attrachero(h2);
+		}
+	}
+}
+
+
+
+
