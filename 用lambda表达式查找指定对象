@@ -1,0 +1,42 @@
+package a2019_11_20;
+/*
+ * 用lambda查找指定对象
+ */
+import java.util.List;
+import java.util.ArrayList;
+import java.util.Random;
+public class Testlambda {
+	public static void main(String[] args) {
+		Random r=new Random();
+		List<Hero> heros=new ArrayList<>();
+		for(int i=0;i<10;i++) {
+			Hero hero=new Hero("hero "+i,r.nextInt(100),r.nextInt(100));
+			heros.add(hero);
+		}
+		System.out.println("初始化后的英雄榜：");
+		for(Hero h:heros)
+			System.out.println(h.tostring());
+		//lambda表达式
+		filter(heros,h->h.hp>30&&h.damage>60);
+		
+		}
+
+	private static void filter(List<Hero> heros,Herochecker checker) {
+		System.out.println("筛选后的英雄榜：");
+		for(Hero h:heros) {
+			if(checker.test(h))
+				System.out.println(h.tostring());
+		}
+	}
+	
+	
+}
+
+interface Herochecker {
+	public boolean test(Hero h);
+}
+
+
+
+
+
