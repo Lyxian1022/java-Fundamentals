@@ -1,0 +1,60 @@
+package a2019_11_20;
+/*
+ * 查找文件-多线程
+ * 利用implements Runnable来开启多线程
+ */
+import java.io.File;
+import java.io.IOException;
+import java.io.FileInputStream;
+
+public class Findfile {
+
+	public static void main(String[] args) {
+		File folder=new File("/Users/liyaxian/Documents/JAVA/Game/src/a2019_11_20");
+		String search="string";
+		searchfile(folder,search);
+	}
+	private static void searchfile(File folder,String search) {
+		if(!folder.exists()) {
+			System.err.println("亲，文件不存在~");
+			return;
+		}
+		if(folder.isFile()&&folder.getAbsolutePath().endsWith(".java")) {
+			searchstr sc1=new searchstr(folder,search);
+			new Thread(sc1).start();
+		}
+		if(folder.isDirectory()) {
+			File[] fs=folder.listFiles();
+			for(File f:fs)
+				searchfile(f,search);
+		}
+	}
+
+}
+class searchstr implements Runnable{
+	private File file;
+	private String search;
+	public searchstr(File file,String search){
+		this.file=file;
+		this.search=search;
+	}
+	@Override
+	public void run() {
+		String mark=searchfile(file);
+		if(mark.contains(search)) {
+			System.out.printf("找到字符，%s在%s文件里\n",search,file.getAbsolutePath());
+		}
+	}
+	public String searchfile(File file) {
+		try (FileInputStream fis=new FileInputStream(file)){
+			byte[] fb=new byte[(int)file.length()];
+			fis.read(fb);
+			return new String(fb);
+		}catch(IOException e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+}
+
+
