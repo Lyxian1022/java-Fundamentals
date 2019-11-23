@@ -1,0 +1,50 @@
+package a2019_11_20;
+/*
+ * 1.把t1加入到主线程中
+ * 2.设置两个进程的优先级一个高，一个底让其去抢CPU资源
+ */
+import java.util.Random;
+
+public class Attrachero {
+
+	public static void main(String[] args) {
+		Random r=new Random();
+		Hero 大晴=new Hero("大晴",150,1);
+		Hero 小先=new Hero("小先",150,1);
+		Hero 晴晴=new Hero("晴晴",150,1);
+		Hero 仙仙=new Hero("仙仙",150,1);
+		
+		Thread t1=new Thread() {
+			public void run() {
+				while(!小先.isdead()) {
+					大晴.attrachero(小先);
+				}
+			}
+		};
+		
+		//t1加入到主线程
+		/*
+		try {
+			t1.join();
+		}catch(InterruptedException e) {
+			e.printStackTrace();
+		}
+		*/
+		Thread t2=new Thread() {
+			public void run() {
+				while(!仙仙.isdead()) {
+					晴晴.attrachero(仙仙);
+				}
+			}
+		};
+		
+		t1.setPriority(Thread.MAX_PRIORITY);
+		t2.setPriority(Thread.MIN_PRIORITY);
+		t1.start();
+		t2.start();
+	}
+
+}
+
+
+
