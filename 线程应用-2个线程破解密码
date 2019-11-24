@@ -1,0 +1,102 @@
+package a2019_11_23;
+/*
+ * 产生一定位数的随机密码
+ * 1.线程1负责穷举法破解密码
+ * 2.线程2负责记录下来所有穷举过的密码清单
+ * 3.3位密码耗时0.1秒左右
+ * 4位数以上密码会报错，内存不够异常
+ */
+import java.util.List;
+import java.util.ArrayList;
+public class 线程应用_破解密码 {
+
+	public static void main(String[] args) {
+		List<String> passwordlist=new ArrayList<>();
+		String password=randstr(3);
+		System.out.println("生成的3位密码是:"+password);
+		crackthread t1=new crackthread(password,passwordlist);
+		logthread t2=new logthread(passwordlist);
+		t1.start();
+		t2.start();
+	}
+	public static String randstr(int len) {
+		char[] password =new char[len];
+		int min='0';
+		int max='z'+1;
+		for(int i=0;i<password.length;i++) {
+			while(true) {
+				char randchar=(char)(Math.random()*(max-min)+min);
+				if(Character.isLetterOrDigit(randchar)) {
+					password[i]=randchar;
+					break;
+				}
+			}
+		}
+		String randpassword=new String(password);
+		return randpassword;
+	}
+
+
+}
+class crackthread extends Thread{
+	private String password;
+	private List<String> passwordlist;
+	public crackthread(String password,List<String> passwordlist) {
+		this.password=password;
+		this.passwordlist=passwordlist;
+	}
+	public String crack(String password){
+		password.toCharArray();
+		char[] guess=new char[password.length()];
+		char[] mark=new char[password.length()];
+		long start=System.currentTimeMillis();
+		for(int i='0';i<'z'+1;i++) {
+			for(int j='0';j<'z'+1;j++) {
+				for(int k='0';k<'z'+1;k++){
+										mark[2]=(char) k;
+										mark[1]=(char) j;
+										mark[0]=(char) i;
+					
+					String newpassword=new String(mark);
+					passwordlist.add(newpassword);
+					if(password.charAt(2)==k&&password.charAt(1)==j
+							&&password.charAt(0)==i) {
+			
+						guess[2]=(char)k;
+						guess[1]=(char)j;
+						guess[0]=(char)i;
+					}
+					}
+				}
+			}	
+		long end=System.currentTimeMillis();
+		System.out.println("破解密码一共花费了"+(end-start)/1000.0+"秒");
+		String truepassword=new String(guess);
+		System.out.printf("通过穷举法得到正确的密码为: %s%n", truepassword);
+		return truepassword;	
+	}
+	public void run() {
+		crack(password);
+	}
+}
+class logthread extends Thread{
+	private List<String>passwordlist;
+	public logthread(List<String> passwordlist) {
+		this.passwordlist=passwordlist;
+		this.setDaemon(true);
+	}
+	public void run() {
+		while(true) {
+			while(passwordlist.isEmpty()) {
+				try {
+					Thread.sleep(1000);
+				}catch(InterruptedException e) {
+					e.printStackTrace();
+				}
+			}
+			String password=passwordlist.remove(0);
+			System.out.println("穷举法产生的密码为："+password);
+		}
+		
+	}
+}
