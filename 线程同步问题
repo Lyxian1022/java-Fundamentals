@@ -1,0 +1,61 @@
+package a2019_11_23;
+/*
+两个线程
+线程1对hp值进行加操作
+线程2对hp值进行减操作
+会产生同步问题
+原始hp=1000;1000次加1000次减后，得到的hp!=1000
+*/
+import a2019_11_20.Hero;
+public class 线程同步 {
+	public static void main(String[] args){
+		Hero qing=new Hero("qing",5000);
+		int n=5000;
+		Thread[] add=new Thread[n];
+		Thread[] sub=new Thread[n];
+		for(int i=0;i<add.length;i++) {
+			Thread t=new Thread() {	
+				public void run() {
+					qing.recover();
+					try {
+							Thread.sleep(100);
+						}catch(InterruptedException e) {
+							e.printStackTrace();
+						}	
+				}
+			};
+			t.start();
+			add[i]=t;
+		}
+		for(int i=0;i<sub.length;i++) {
+			Thread t2=new Thread() {
+				public void run() {
+					qing.hurt();
+					try {
+						Thread.sleep(100);
+					}catch(InterruptedException e2) {
+						e2.printStackTrace();
+					}
+				}
+			};
+			t2.start();
+			sub[i]=t2;
+		}
+		for(Thread t:add) {
+			try {
+				t.join();
+			}catch(InterruptedException e) {
+				e.printStackTrace();
+			}
+		}
+		for(Thread t:sub) {
+			try {
+				t.join();
+			}catch(InterruptedException e) {
+				e.printStackTrace();
+			}
+		}
+		System.out.printf("%d个增加线程和%d个减少线程结束后%n盖伦的血量变成了 %d%n", n,n,qing.hp);
+        
+	}
+}
